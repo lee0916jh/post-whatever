@@ -12,20 +12,24 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
+      name: "",
+      email: "",
+      password: "",
     };
   }
 
-  onSignOut = () => {
+  signOut = () => {
     this.setState({ isLoggedIn: false });
   };
 
+  register = () => [fetch("http://localhost:3000/register")];
+
   render() {
     const { posts, isLoggedIn } = this.state;
-    console.log(1);
     return (
       <Router>
-        <NavBar isLoggedIn={isLoggedIn} onSignOut={this.onSignOut} />
+        <NavBar isLoggedIn={isLoggedIn} signOut={this.signOut} />
         <Switch>
           <Route path="/" exact component={Home}></Route>
           <Route path="/about"></Route>
@@ -37,7 +41,7 @@ class App extends React.Component {
             <Register />
           </Route>
           <Route path="/signin">
-            <Signin />
+            <Signin signIn={this.signIn} />
           </Route>
         </Switch>
       </Router>
