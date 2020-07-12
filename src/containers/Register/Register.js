@@ -1,31 +1,38 @@
 import React from "react";
+import { Redirect } from "react-router";
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "", password: "" };
+    this.state = { isLoggedIn: this.props.isLoggedIn };
   }
 
-  onInputChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  logIn() {
+    this.setState({ isLoggedIn: true });
+  }
 
   onRegister = () => {
     fetch("http://localhost:3000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
+        name: this.props.name,
+        email: this.props.email,
+        password: this.props.password,
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        this.setState({ isLoggedIn: true });
+        console.log(data);
+      })
       .catch((err) => console.log(err));
   };
 
   render() {
+    if (this.props.isLoggedIn === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <article className="pa4 black-80">
         <div action="sign-up_submit" method="get" acceptCharset="utf-8">
@@ -40,7 +47,7 @@ class Register extends React.Component {
                 type="text"
                 name="name"
                 id="name"
-                onChange={this.onInputChange}
+                onChange={this.props.onInputChange}
               />
             </div>
             <div className="mt3">
@@ -52,7 +59,7 @@ class Register extends React.Component {
                 type="email"
                 name="email"
                 id="email"
-                onChange={this.onInputChange}
+                onChange={this.props.onInputChange}
               />
             </div>
             <div className="mt3">
@@ -64,7 +71,7 @@ class Register extends React.Component {
                 type="password"
                 name="password"
                 id="password"
-                onChange={this.onInputChange}
+                onChange={this.props.onInputChange}
               />
             </div>
           </fieldset>

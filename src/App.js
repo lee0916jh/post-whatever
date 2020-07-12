@@ -17,16 +17,46 @@ class App extends React.Component {
       email: "",
       password: "",
     };
+    this.onSubmitSignIn = this.onSubmitSignIn.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
-
   signOut = () => {
     this.setState({ isLoggedIn: false });
   };
 
-  register = () => [fetch("http://localhost:3000/register")];
+  onInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onSubmitSignIn = () => {
+    fetch("http://localhost:3000/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.id) {
+          this.setState({
+            isLoggedIn: true,
+            name: data.name,
+            email: data.email,
+            joined: data.joined,
+            posts: data.posts,
+          });
+          alert("You are logged in!");
+        } else {
+          alert(data);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   render() {
-    const { posts, isLoggedIn } = this.state;
+    const { posts, isLoggedIn, email, password, name } = this.state;
     return (
       <Router>
         <NavBar isLoggedIn={isLoggedIn} signOut={this.signOut} />
@@ -38,10 +68,20 @@ class App extends React.Component {
           </Route>
           <Route path="/login"></Route>
           <Route path="/register">
-            <Register />
+            <Register
+              onInputChange={this.onInputChange}
+              name={name}
+              email={email}
+              password={password}
+              isLoggedIn={isLoggedIn}
+            />
           </Route>
           <Route path="/signin">
-            <Signin signIn={this.signIn} />
+            <Signin
+              isLoggedIn={isLoggedIn}
+              onInputChange={this.onInputChange}
+              onSubmitSignIn={this.onSubmitSignIn}
+            />
           </Route>
         </Switch>
       </Router>
