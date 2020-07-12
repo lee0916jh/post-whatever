@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.flex-reverse {
+  flex-direction: row-reverse;
+}
