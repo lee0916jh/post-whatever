@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
 
 class WritePostPage extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class WritePostPage extends React.Component {
   };
   render() {
     return (
-      <Container>
+      <div>
         <div className="flex flex-column">
           <div className="pa2 black-80 w-100">
             <div className="w-100">
@@ -62,12 +63,18 @@ class WritePostPage extends React.Component {
             </div>
           </div>
           <div className="pa2 w-100">
-            <Button className="fr" variant="contained" onClick={this.writePost}>
-              Post
-            </Button>
+            <Link to="/forum">
+              <Button
+                className="fr"
+                variant="contained"
+                onClick={this.writePost}
+              >
+                Post
+              </Button>
+            </Link>
           </div>
         </div>
-      </Container>
+      </div>
     );
   }
 }

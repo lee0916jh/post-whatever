@@ -1,14 +1,14 @@
 import React from "react";
+import { Route } from "react-router-dom";
 
 import ForumHeader from "../../components/ForumHeader";
 import Board from "../../components/Board";
-
-import Container from "@material-ui/core/Container";
+import PostPage from "../../components/PostPage";
 
 class Forum extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = { posts: [] };
   }
 
   componentDidMount() {
@@ -20,14 +20,20 @@ class Forum extends React.Component {
   }
 
   render() {
+    const { posts } = this.state;
     return (
-      <>
-        <h2 className="f1 tc">Forum</h2>
-        <Container className="flex flex-column">
-          <ForumHeader />
-          <Board posts={this.state.posts} />
-        </Container>
-      </>
+      <React.Fragment>
+        <Route path="/forum" exact>
+          <h2 className="f1 tc">Forum</h2>
+          <div className="flex flex-column">
+            <ForumHeader />
+            <Board posts={posts} />
+          </div>
+        </Route>
+        <Route path="/forum/posts">
+          <PostPage id={this.props.id} />
+        </Route>
+      </React.Fragment>
     );
   }
 }

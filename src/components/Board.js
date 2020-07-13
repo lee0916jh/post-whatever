@@ -3,7 +3,6 @@ import React from "react";
 import Post from "./Post";
 
 const Board = ({ posts }) => {
-  console.log(posts);
   if (posts) {
     return (
       <>

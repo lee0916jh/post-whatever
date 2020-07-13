@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Post = ({ post }) => {
   return (
     <div className="flex">
@@ -7,7 +7,9 @@ const Post = ({ post }) => {
         <code>{post.id}</code>
       </div>
       <div className="outline w-80 pa2">
-        <code>{post.title}</code>
+        <Link to={"/forum/posts/" + post.id} className="link">
+          {post.title}
+        </Link>
       </div>
       <div className="outline w-20 pa2 tc">
         <code>{post.poster_name}</code>

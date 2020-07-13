@@ -9,6 +9,8 @@ import Signin from "./containers/Signin/Signin";
 import Profile from "./containers/Profile/Profile";
 import WritePostPage from "./components/WirtePostPage";
 
+import Container from "@material-ui/core/Container";
+
 import "./App.css";
 
 class App extends React.Component {
@@ -87,36 +89,42 @@ class App extends React.Component {
     return (
       <Router>
         <NavBar isLoggedIn={isLoggedIn} signOut={this.signOut} />
-        <Switch>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/forum" exact>
-            <Forum />
-          </Route>
-          <Route path="/forum/post">
-            <WritePostPage id={id} name={name} />
-          </Route>
-          <Route path="/login"></Route>
-          <Route path="/register">
-            <Register
-              onInputChange={this.onInputChange}
-              onSubmitRegister={this.onSubmitRegister}
-              name={name}
-              email={email}
-              password={password}
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
-          <Route path="/signin">
-            <Signin
-              isLoggedIn={isLoggedIn}
-              onInputChange={this.onInputChange}
-              onSubmitSignIn={this.onSubmitSignIn}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile name={name} email={email} joined={joined} posts={posts} />
-          </Route>
-        </Switch>
+        <Container>
+          <Switch>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/forum/post" exact>
+              <WritePostPage id={id} name={name} />
+            </Route>
+            <Route path="/forum">
+              <Forum id={id} />
+            </Route>
+            <Route path="/register">
+              <Register
+                onInputChange={this.onInputChange}
+                onSubmitRegister={this.onSubmitRegister}
+                name={name}
+                email={email}
+                password={password}
+                isLoggedIn={isLoggedIn}
+              />
+            </Route>
+            <Route path="/signin">
+              <Signin
+                isLoggedIn={isLoggedIn}
+                onInputChange={this.onInputChange}
+                onSubmitSignIn={this.onSubmitSignIn}
+              />
+            </Route>
+            <Route path="/profile">
+              <Profile
+                name={name}
+                email={email}
+                joined={joined}
+                posts={posts}
+              />
+            </Route>
+          </Switch>
+        </Container>
       </Router>
     );
   }
