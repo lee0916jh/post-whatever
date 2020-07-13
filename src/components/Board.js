@@ -3,10 +3,16 @@ import React from "react";
 import Post from "./Post";
 
 const Board = ({ posts }) => {
-  console.log(posts[0]);
-  return posts.map((post, i) => {
-    return <Post key={i} post={post} />;
-  });
+  console.log(posts);
+  if (posts) {
+    return (
+      <>
+        {posts.map((post, i) => {
+          return <Post key={i} post={post} />;
+        })}
+      </>
+    );
+  } else return <></>;
 };
 
 export default Board;

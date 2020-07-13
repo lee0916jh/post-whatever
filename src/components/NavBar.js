@@ -4,20 +4,25 @@ import { Link } from "react-router-dom";
 const NavBar = ({ isLoggedIn, signOut }) => {
   const loginControl = !isLoggedIn ? (
     <>
-      <Link className="link dim gray f6 f5-ns dib mr3" to="/signin">
+      <Link className="link dim gray f6 f5-ns dib ml-auto mr3" to="/signin">
         Sign In
       </Link>
-      <Link className="link dim gray f6 f5-ns dib mr3" to="/register">
+      <Link className="link dim gray f6 f5-ns dib" to="/register">
         Sign Up
       </Link>
     </>
   ) : (
-    <Link className="link dim gray f6 f5-ns dib" to="/" onClick={signOut}>
-      Sign Out
-    </Link>
+    <>
+      <Link className="link dim gray f6 f5-ns dib ml-auto mr3" to="/profile">
+        Profile
+      </Link>
+      <Link className="link dim gray f6 f5-ns dib" to="/" onClick={signOut}>
+        Sign Out
+      </Link>
+    </>
   );
   return (
-    <nav className="pa3 pa4-ns ttu">
+    <nav className="pa3 pa4-ns ttu flex">
       <Link className="link dim black b f6 f5-ns dib mr3" to="/">
         Site Name
       </Link>

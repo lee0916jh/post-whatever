@@ -6,6 +6,9 @@ import Home from "./containers/Home/Home";
 import Forum from "./containers/Forum/Forum";
 import Register from "./containers/Register/Register";
 import Signin from "./containers/Signin/Signin";
+import Profile from "./containers/Profile/Profile";
+import WritePostPage from "./components/WirtePostPage";
+
 import "./App.css";
 
 class App extends React.Component {
@@ -13,12 +16,15 @@ class App extends React.Component {
     super();
     this.state = {
       isLoggedIn: false,
-      name: "",
+      id: 0,
+      name: "Anonymous",
       email: "",
       password: "",
+      joined: "",
     };
     this.onSubmitSignIn = this.onSubmitSignIn.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onSubmitRegister = this.onSubmitRegister.bind(this);
   }
   signOut = () => {
     this.setState({ isLoggedIn: false });
@@ -44,8 +50,9 @@ class App extends React.Component {
             isLoggedIn: true,
             name: data.name,
             email: data.email,
-            joined: data.joined,
             posts: data.posts,
+            joined: data.joined,
+            id: data.id,
           });
           alert("You are logged in!");
         } else {
@@ -55,21 +62,44 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  onSubmitRegister = () => {
+    console.log(this);
+    fetch("http://localhost:3000/register", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ isLoggedIn: true, password: "hidden" });
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
-    const { posts, isLoggedIn, email, password, name } = this.state;
+    const { id, posts, isLoggedIn, email, password, name, joined } = this.state;
     return (
       <Router>
         <NavBar isLoggedIn={isLoggedIn} signOut={this.signOut} />
         <Switch>
           <Route path="/" exact component={Home}></Route>
-          <Route path="/about"></Route>
-          <Route path="/forum">
-            <Forum posts={posts} />
+          <Route path="/forum" exact>
+            <Forum />
+          </Route>
+          <Route path="/forum/post">
+            <WritePostPage id={id} name={name} />
           </Route>
           <Route path="/login"></Route>
           <Route path="/register">
             <Register
               onInputChange={this.onInputChange}
+              onSubmitRegister={this.onSubmitRegister}
               name={name}
               email={email}
               password={password}
@@ -82,6 +112,9 @@ class App extends React.Component {
               onInputChange={this.onInputChange}
               onSubmitSignIn={this.onSubmitSignIn}
             />
+          </Route>
+          <Route path="/profile">
+            <Profile name={name} email={email} joined={joined} posts={posts} />
           </Route>
         </Switch>
       </Router>

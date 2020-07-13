@@ -9,3 +9,12 @@
 .flex-reverse {
   flex-direction: row-reverse;
 }
+
+.scrollabletextbox {
+  height: 70vh;
+  width: 100%;
+  overflow: scroll;
+}
+.fr {
+  float: right;
+}

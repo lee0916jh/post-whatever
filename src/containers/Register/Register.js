@@ -2,34 +2,8 @@ import React from "react";
 import { Redirect } from "react-router";
 
 class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoggedIn: this.props.isLoggedIn };
-  }
-
-  logIn() {
-    this.setState({ isLoggedIn: true });
-  }
-
-  onRegister = () => {
-    fetch("http://localhost:3000/register", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.props.name,
-        email: this.props.email,
-        password: this.props.password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ isLoggedIn: true });
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  };
-
   render() {
+    const { onSubmitRegister, onInputChange } = this.props;
     if (this.props.isLoggedIn === true) {
       return <Redirect to="/" />;
     }
@@ -47,7 +21,7 @@ class Register extends React.Component {
                 type="text"
                 name="name"
                 id="name"
-                onChange={this.props.onInputChange}
+                onChange={onInputChange}
               />
             </div>
             <div className="mt3">
@@ -59,7 +33,7 @@ class Register extends React.Component {
                 type="email"
                 name="email"
                 id="email"
-                onChange={this.props.onInputChange}
+                onChange={onInputChange}
               />
             </div>
             <div className="mt3">
@@ -80,7 +54,7 @@ class Register extends React.Component {
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
               type="submit"
               value="Sign Up"
-              onClick={this.onRegister}
+              onClick={onSubmitRegister}
             />
           </div>
         </div>
