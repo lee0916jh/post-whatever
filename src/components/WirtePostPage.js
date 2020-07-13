@@ -16,6 +16,7 @@ class WritePostPage extends React.Component {
   onInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
   writePost = () => {
     const { id, name, title, text } = this.state;
     fetch("http://localhost:3000/forum/post", {

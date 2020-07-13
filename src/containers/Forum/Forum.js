@@ -9,17 +9,26 @@ class Forum extends React.Component {
   constructor(props) {
     super(props);
     this.state = { posts: [] };
+    this.updateParentPosts = this.updateParentPosts.bind(this);
   }
-
-  componentDidMount() {
+  fetchPostsData() {
     fetch("http://localhost:3000/forum")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ posts: data });
       });
   }
+  componentDidMount() {
+    this.fetchPostsData();
+  }
+
+  updateParentPosts() {
+    //for PostPage
+    this.fetchPostsData();
+  }
 
   render() {
+    console.log("PARENT RENDER");
     const { posts } = this.state;
     return (
       <React.Fragment>
@@ -31,7 +40,10 @@ class Forum extends React.Component {
           </div>
         </Route>
         <Route path="/forum/posts">
-          <PostPage id={this.props.id} />
+          <PostPage
+            id={this.props.id}
+            updateParentPosts={this.updateParentPosts}
+          />
         </Route>
       </React.Fragment>
     );

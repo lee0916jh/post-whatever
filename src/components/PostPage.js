@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 import Button from "@material-ui/core/Button";
 
 class PostPage extends React.Component {
@@ -7,6 +8,7 @@ class PostPage extends React.Component {
     this.state = {};
     const currPath = window.location.pathname;
     this.postId = +currPath.slice(13);
+    this.rerender = false;
   }
 
   componentDidMount() {
@@ -24,16 +26,28 @@ class PostPage extends React.Component {
   }
 
   onClickDelete = () => {
-    if (this.state.posterId === this.props.id) {
+    if (this.props.id === 0) {
+      alert("Sorry! Anonymous user cannot delete any posts.");
+    } else if (this.state.posterId === this.props.id) {
       fetch("http://localhost:3000/forum/posts/" + this.postId, {
         method: "delete",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: this.postId }),
-      });
+      })
+        .then((res) => res.json)
+        .then((data) => {
+          this.rerender = true;
+          this.props.updateParentPosts();
+        });
+    } else {
+      alert("Sorry! You can only delete posts you created.");
     }
   };
   render() {
     const { title, text, posterName } = this.state;
+    if (this.rerender) {
+      return <Redirect to="/forum" />;
+    }
     return (
       <div className="flex flex-column">
         <article className="pa3 pa5-ns">
