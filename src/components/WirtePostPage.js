@@ -32,7 +32,10 @@ class WritePostPage extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log("Posting success"))
+      .then((data) => {
+        this.props.updateParentPosts();
+        console.log("Posting success");
+      })
       .catch((err) => console.log("Posting error"));
   };
 
