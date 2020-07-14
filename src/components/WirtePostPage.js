@@ -18,7 +18,6 @@ class WritePostPage extends React.Component {
   };
 
   writePost = () => {
-    console.log(this.state);
     const { id, name, title, text } = this.state;
     fetch("https://secret-headland-89973.herokuapp.com/forum/post", {
       method: "post",
@@ -33,8 +32,8 @@ class WritePostPage extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((data) => console.log("Posting success"))
+      .catch((err) => console.log("Posting error"));
   };
 
   render() {

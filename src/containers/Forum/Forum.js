@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import ForumHeader from "../../components/ForumHeader";
 import Board from "../../components/Board";
 import PostPage from "../../components/PostPage";
+import WritePostPage from "./components/WirtePostPage";
 
 class Forum extends React.Component {
   constructor(props) {
@@ -44,6 +45,9 @@ class Forum extends React.Component {
             id={this.props.id}
             updateParentPosts={this.updateParentPosts}
           />
+        </Route>
+        <Route path="/forum/post">
+          <WritePostPage id={this.props.id} name={this.props.name} />
         </Route>
       </React.Fragment>
     );

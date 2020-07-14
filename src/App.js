@@ -7,7 +7,6 @@ import Forum from "./containers/Forum/Forum";
 import Register from "./containers/Register/Register";
 import Signin from "./containers/Signin/Signin";
 import Profile from "./containers/Profile/Profile";
-import WritePostPage from "./components/WirtePostPage";
 
 import Container from "@material-ui/core/Container";
 
@@ -89,11 +88,8 @@ class App extends React.Component {
         <Container>
           <Switch>
             <Route path="/" exact component={Home}></Route>
-            <Route path="/forum/post" exact>
-              <WritePostPage id={id} name={name} />
-            </Route>
             <Route path="/forum">
-              <Forum id={id} />
+              <Forum id={id} name={name} />
             </Route>
             <Route path="/register">
               <Register
