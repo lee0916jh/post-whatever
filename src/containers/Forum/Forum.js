@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import ForumHeader from "../../components/ForumHeader";
 import Board from "../../components/Board";
 import PostPage from "../../components/PostPage";
-import WritePostPage from "./components/WirtePostPage";
+import WritePostPage from "../../components/WirtePostPage";
 
 class Forum extends React.Component {
   constructor(props) {
