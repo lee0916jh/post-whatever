@@ -12,7 +12,7 @@ class Forum extends React.Component {
     this.updateParentPosts = this.updateParentPosts.bind(this);
   }
   fetchPostsData() {
-    fetch("http://localhost:3000/forum")
+    fetch("https://secret-headland-89973.herokuapp.com/forum")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ posts: data });

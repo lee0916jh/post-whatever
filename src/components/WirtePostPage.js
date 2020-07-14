@@ -19,7 +19,7 @@ class WritePostPage extends React.Component {
 
   writePost = () => {
     const { id, name, title, text } = this.state;
-    fetch("http://localhost:3000/forum/post", {
+    fetch("https://secret-headland-89973.herokuapp.com/forum/post", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -12,7 +12,9 @@ class PostPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/forum/posts/" + this.postId)
+    fetch(
+      "https://secret-headland-89973.herokuapp.com/forum/posts/" + this.postId
+    )
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -29,11 +31,15 @@ class PostPage extends React.Component {
     if (this.props.id === 0) {
       alert("Sorry! Anonymous user cannot delete any posts.");
     } else if (this.state.posterId === this.props.id) {
-      fetch("http://localhost:3000/forum/posts/" + this.postId, {
-        method: "delete",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: this.postId }),
-      })
+      fetch(
+        "https://secret-headland-89973.herokuapp.com/forum/posts/" +
+          this.postId,
+        {
+          method: "delete",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: this.postId }),
+        }
+      )
         .then((res) => res.json)
         .then((data) => {
           this.rerender = true;

@@ -37,7 +37,7 @@ class App extends React.Component {
   };
 
   onSubmitSignIn = () => {
-    fetch("http://localhost:3000/signin", {
+    fetch("https://secret-headland-89973.herokuapp.com/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -66,7 +66,7 @@ class App extends React.Component {
 
   onSubmitRegister = () => {
     console.log(this);
-    fetch("http://localhost:3000/register", {
+    fetch("https://secret-headland-89973.herokuapp.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
