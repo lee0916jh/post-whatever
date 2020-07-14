@@ -65,7 +65,6 @@ class App extends React.Component {
   };
 
   onSubmitRegister = () => {
-    console.log(this);
     fetch("https://secret-headland-89973.herokuapp.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -78,8 +77,6 @@ class App extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ isLoggedIn: true, password: "hidden" });
-
-        console.log(data);
       })
       .catch((err) => console.log(err));
   };

@@ -17,7 +17,7 @@ class Forum extends React.Component {
       .then((data) => {
         this.setState({ posts: data });
       })
-      .catch(console.log("Error fetching posts"));
+      .catch((err) => console.log(err));
   }
   componentDidMount() {
     this.fetchPostsData();
