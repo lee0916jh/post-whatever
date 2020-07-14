@@ -25,7 +25,7 @@ class Forum extends React.Component {
   }
 
   updateParentPosts() {
-    //for PostPage
+    //for PostPage & WritePostPage
     this.fetchPostsData();
   }
 
@@ -47,7 +47,11 @@ class Forum extends React.Component {
           />
         </Route>
         <Route path="/forum/post">
-          <WritePostPage id={this.props.id} name={this.props.name} />
+          <WritePostPage
+            id={this.props.id}
+            name={this.props.name}
+            updateParentPosts={this.updateParentPosts}
+          />
         </Route>
       </React.Fragment>
     );
