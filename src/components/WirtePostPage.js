@@ -18,6 +18,7 @@ class WritePostPage extends React.Component {
   };
 
   writePost = () => {
+    console.log(this.state);
     const { id, name, title, text } = this.state;
     fetch("https://secret-headland-89973.herokuapp.com/forum/post", {
       method: "post",
