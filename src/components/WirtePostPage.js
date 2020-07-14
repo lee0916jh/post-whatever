@@ -30,8 +30,12 @@ class WritePostPage extends React.Component {
         title: title,
         text: text,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
+
   render() {
     return (
       <div>
