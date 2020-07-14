@@ -16,7 +16,8 @@ class Forum extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ posts: data });
-      });
+      })
+      .catch(console.log("Error fetching posts"));
   }
   componentDidMount() {
     this.fetchPostsData();
@@ -28,7 +29,6 @@ class Forum extends React.Component {
   }
 
   render() {
-    console.log("PARENT RENDER");
     const { posts } = this.state;
     return (
       <React.Fragment>
